@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  ftpd_server:
+    image: stilliard/pure-ftpd
+    container_name: pure-ftpd
+    ports:
+      - "21:21"
+      - "30000-30009:30000-30009"
+    volumes:
+      - "/data-import-batch/data:/home/maddytec"
+      - "/data-import-batch/passwd:/etc/pure-ftpd/passwd"
+    environment:
+      PUBLICHOST: "localhost"
+      FTP_USER_NAME: maddytec
+      FTP_USER_PASS: maddytec
+      FTP_USER_HOME: /home/maddytec
+    restart: always
+
