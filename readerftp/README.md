@@ -17,3 +17,9 @@ docker-compose -f docker-s3ninja.yml up -d
 ```
 docker-compose -f docker-postgres.yml up -d
 ```
+
+# How run the Kafka
+
+```
+docker-compose -f docker-kafka-ui.yml up -d
+```

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @Service
@@ -16,8 +17,11 @@ public class TransferFileService {
     @Autowired
     private FileService fileService;
 
+    @Autowired
+    private SendFileKafkaService sendFileKafkaService;
+
     @Scheduled(fixedRate = 100*600)
-    public void execute(){
+    public void execute() throws FileNotFoundException {
         List<FileTransfer> files = transferFTPService.execute();
 
         for(FileTransfer fileTransfer : files){
@@ -28,6 +32,7 @@ public class TransferFileService {
             );
 
             fileTransfer.setUuid(uuid);
+            sendFileKafkaService.execute(fileTransfer);
         }
 
     }

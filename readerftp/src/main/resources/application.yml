@@ -1,0 +1,21 @@
+kafka:
+  bootstrap-servers: 127.0.0.1:9092
+  topic1: topic-transf-file-s1
+  topic2: topic-transf-file-s2
+  consumergroup: leitorftp-group
+  procucer:
+    max:
+      request:
+        size: 231072000
+    batch-size: 60000000
+    buffer-memory: 60000000
+    bootstrap-servers: 127.0.0.1:9092
+    client-id: reader-ftp-producer
+    cosumer:
+      group-id: readerftp-group
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+
+spring:
+  application:
+    name: reader-ftp-producer
